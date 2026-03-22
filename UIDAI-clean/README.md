@@ -128,11 +128,13 @@ http://localhost:5000
 
 ## Built By
 
-**Thisha S** — B.Tech Computer Science Engineering, VIT Chennai  
-*Academic project submitted as part of data science coursework*
-
+**Thisha S** — B.Tech Computer Science Engineering, VIT Chennai
+*Built for the UIDAI Hackathon — dataset provided by UIDAI (Unique Identification Authority of India)*
 ---
-
 ## License
 
-This project was built for academic and research purposes. Data is synthetic/predicted and not official UIDAI data.
+This project was developed as part of the UIDAI Hackathon.
+All data used in this project was officially provided by UIDAI 
+(Unique Identification Authority of India) for hackathon purposes.
+Data belongs to UIDAI and is not to be used outside this context.
+
