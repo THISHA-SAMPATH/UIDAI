@@ -1,0 +1,254 @@
+/* =========================================
+   1. COLOR VARIABLES & THEME PALETTES
+   ========================================= */
+:root {
+    /* --- LIGHT THEME (Default) --- */
+    --bg-body: #f3f4f6;       /* Light Gray Background */
+    --bg-card: #ffffff;       /* White Cards */
+    --bg-header: #ffffff;     /* White Header */
+    
+    --text-main: #1f2937;     /* Dark Gray Text */
+    --text-muted: #6b7280;    /* Muted Text */
+    
+    --border-color: #e5e7eb;  /* Light Borders */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    /* Brand Colors (Standard) */
+    --brand-blue: #0056b3;
+    --brand-orange: #f97316;
+    --brand-red: #dc2626;
+    --brand-green: #16a34a;
+}
+
+[data-theme="dark"] {
+    /* --- DARK THEME (Professional Midnight) --- */
+    --bg-body: #0f172a;       /* Deep Slate Navy (Main Background) */
+    --bg-card: #1e293b;       /* Lighter Slate (Cards) */
+    --bg-header: #1e293b;     /* Match Header to Cards */
+    
+    --text-main: #f1f5f9;     /* Off-White Text */
+    --text-muted: #94a3b8;    /* Blue-ish Gray Muted Text */
+    
+    --border-color: #334155;  /* Dark Slate Borders */
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Deeper Shadow for Dark Mode */
+    
+    /* Brand Colors (Brightened for visibility on dark) */
+    --brand-blue: #60a5fa;    /* Lighter Blue */
+    --brand-orange: #fb923c;  /* Lighter Orange */
+    --brand-red: #f87171;     /* Soft Red */
+    --brand-green: #4ade80;   /* Neon Green */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+
+body { background-color: var(--bg-body); color: var(--text-main); overflow-x: hidden; }
+
+/* =========================================
+   2. TOP STRIP & HEADER
+   ========================================= */
+.access-bar {
+    background: #111827; /* Always keep top strip dark */
+    color: #9ca3af;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #374151;
+}
+.access-links a { color: #d1d5db; text-decoration: none; margin-right: 15px; }
+.access-links a:hover { color: white; }
+
+.main-header {
+    background: var(--bg-header);
+    padding: 15px 40px;
+    box-shadow: var(--shadow);
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brand { display: flex; align-items: center; gap: 15px; }
+.brand img { height: 50px; }
+.brand h1 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); line-height: 1.1; }
+.brand p { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* Navigation Tabs */
+.nav-tabs button {
+    background: transparent; border: none;
+    padding: 10px 20px; font-size: 0.95rem; font-weight: 600;
+    color: var(--text-muted); cursor: pointer;
+    border-radius: 8px; transition: all 0.2s;
+}
+.nav-tabs button:hover { background: rgba(0,0,0,0.05); color: var(--brand-blue); }
+[data-theme="dark"] .nav-tabs button:hover { background: rgba(255,255,255,0.05); }
+
+.nav-tabs button.active {
+    background: var(--brand-blue);
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* =========================================
+   3. LIVE TICKER
+   ========================================= */
+.ticker-wrap {
+    background: #1e40af; /* Keep bold blue for attention */
+    color: white; height: 36px; overflow: hidden;
+    display: flex; align-items: center; position: relative;
+}
+.ticker-label {
+    background: #dc2626; height: 100%; padding: 0 20px;
+    display: flex; align-items: center; font-weight: 800; font-size: 0.75rem;
+    position: absolute; z-index: 10; box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+}
+.ticker-content {
+    white-space: nowrap; padding-left: 160px;
+    animation: ticker 30s linear infinite; font-size: 0.85rem; font-weight: 500;
+}
+@keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+/* =========================================
+   4. DASHBOARD LAYOUT
+   ========================================= */
+.container { max-width: 1400px; margin: 0 auto; padding: 30px; }
+
+/* Controls Bar */
+.controls { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 25px; align-items: center; }
+.gov-dropdown {
+    padding: 10px 15px; border: 1px solid var(--border-color);
+    background: var(--bg-card); color: var(--text-main);
+    border-radius: 6px; font-size: 0.9rem; min-width: 220px; outline: none;
+}
+.gov-btn {
+    background: var(--brand-orange); color: white; border: none;
+    padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 5px rgba(249, 115, 22, 0.4);
+    display: flex; align-items: center; gap: 8px;
+}
+.gov-btn:hover { transform: translateY(-2px); filter: brightness(110%); }
+
+/* Stats Grid */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 30px; }
+
+.card {
+    background: var(--bg-card); padding: 25px;
+    border-radius: 12px; border: 1px solid var(--border-color);
+    box-shadow: var(--shadow); position: relative; overflow: hidden;
+}
+/* Colorful Left Borders */
+.card-blue { border-left: 5px solid var(--brand-blue); }
+.card-orange { border-left: 5px solid var(--brand-orange); }
+.card-red { border-left: 5px solid var(--brand-red); }
+.card-green { border-left: 5px solid var(--brand-green); }
+
+.card h3 { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+.card h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin: 0; line-height: 1.1; }
+.card small { font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 8px; opacity: 0.8; }
+
+/* Charts Area */
+.split-view { display: grid; grid-template-columns: 2.5fr 1fr; gap: 20px; }
+.chart-box {
+    background: var(--bg-card); padding: 25px;
+    border-radius: 12px; border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+.chart-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);
+}
+.chart-header h3 { font-size: 1.1rem; color: var(--text-main); margin: 0; }
+
+/* Resource List */
+.resource-list { list-style: none; margin-top: 15px; }
+.resource-list li {
+    padding: 12px 0; border-bottom: 1px dashed var(--border-color);
+    font-size: 0.9rem; color: var(--text-main);
+}
+.resource-list li strong { color: var(--brand-blue); }
+
+/* 7. ALERTS LIST STYLING */
+.alert-item { 
+    padding: 12px 15px; 
+    margin-bottom: 10px; 
+    background: #f8fafc; /* Light gray background */
+    border-left: 4px solid #64748b; 
+    border-radius: 4px; 
+    color: var(--text-main);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.alert-item.Critical { 
+    background: #fef2f2; 
+    border-left-color: #dc2626; 
+    color: #991b1b; 
+}
+
+.alert-item.High { 
+    background: #fff7ed; 
+    border-left-color: #f97316; 
+    color: #9a3412; 
+}
+
+.alert-item.Medium {
+    background: #eff6ff;
+    border-left-color: #3b82f6;
+    color: #1e40af;
+}
+
+/* =========================================
+   5. RESPONSIVE
+   ========================================= */
+@media (max-width: 1024px) {
+    .split-view { grid-template-columns: 1fr; }
+    .main-header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+    .nav-tabs { width: 100%; display: flex; justify-content: center; gap: 10px; }
+    .brand { flex-direction: column; text-align: center; }
+}
+/* =========================================
+   UPDATED CONTROLS BAR (With Logo)
+   ========================================= */
+.controls { 
+    display: flex; 
+    justify-content: space-between; /* Pushes Logo left, Buttons right */
+    align-items: center; 
+    margin-bottom: 30px; 
+    background: var(--card-bg); /* Matches card background */
+    padding: 15px 25px; 
+    border-radius: 12px; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+    border: 1px solid #e5e7eb;
+}
+
+/* Left Side Styling */
+.controls-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.aadhaar-logo-small {
+    height: 50px; /* Adjust logo size */
+    width: auto;
+}
+
+.platform-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* Right Side Styling */
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Dark Mode Adjustment for Logo/Text */
+[data-theme="dark"] .controls {
+    border-color: #334155;
+}
+[data-theme="dark"] .aadhaar-logo-small {
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.2)); /* Slight glow for visibility */
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UIDAI Analytics | Official Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="access-bar">
+        <div class="access-links">
+            <a href="#">Skip to Main Content</a> | 
+            <a href="#"><i class="fas fa-wheelchair"></i> Screen Reader Access</a>
+        </div>
+        <div class="access-tools">
+            <button onclick="resizeFont(-1)">A-</button>
+            <button onclick="resizeFont(0)">A</button>
+            <button onclick="resizeFont(1)">A+</button>
+            <button onclick="toggleTheme()" id="themeToggle" title="High Contrast">
+                <i class="fas fa-adjust"></i>
+            </button>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="brand">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem">
+            <div>
+                <h1>Unique Identification Authority of India</h1>
+                <p>Government of India | Analytics Division</p>
+            </div>
+        </div>
+        <nav class="nav-tabs">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="active">Dashboard</button>
+            <button onclick="switchTab('analytics')" id="nav-analytics">Granular Analytics</button>
+            <button onclick="switchTab('anomaly')" id="nav-anomaly">Anomaly Detection</button>
+        </nav>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker-label">LIVE UPDATES</div>
+        <div class="ticker-content">
+            <span style="margin-right:50px"><i class="fas fa-bullhorn"></i> PEAK DEMAND PREDICTED: March 04, 2026.</span>
+            <span style="margin-right:50px"><i class="fas fa-exclamation-triangle"></i> CRITICAL ALERT: Tamil Nadu region requires immediate stock replenishment.</span>
+            <span style="margin-right:50px"><i class="fas fa-check-circle"></i> SYSTEM STATUS: AI Models Online (94.2% Accuracy).</span>
+        </div>
+    </div>
+
+    <main class="container">
+        
+        <div id="view-dashboard">
+            <div class="controls">
+                <div class="controls-left">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/cf/Aadhaar_Logo.svg" alt="Aadhaar Logo" class="aadhaar-logo-small">
+                    <h2 class="platform-title">Aadhaar Analytic Platform</h2>
+                </div>
+
+                <div class="controls-right">
+                    <span id="last-updated" style="align-self:center; font-size:0.85rem; color:gray;">Updating...</span>
+                    <select id="stateSelect" class="gov-dropdown"><option>Loading States...</option></select>
+                    <button class="gov-btn" onclick="window.print()"><i class="fas fa-download"></i> Report</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="card card-blue">
+                    <h3>Predicted Demand</h3>
+                    <h2 id="val-demand">Loading...</h2>
+                    <small>
+                        Next 100 Days Forecast<br>
+                        <span style="opacity:0.8; font-weight:bold;"></span>
+                            For 1 day ≈ <span id="val-daily-avg">--</span>
+                        </span>
+                    </small>
+                </div>
+                <div class="card card-orange">
+                    <h3>Peak Stress Date</h3>
+                    <h2 id="val-date">--</h2>
+                    <small>High Traffic Warning</small>
+                </div>
+                <div class="card card-red">
+                    <h3>Critical Zone</h3>
+                    <h2 id="val-zone">--</h2>
+                    <small>Action Required</small>
+                </div>
+                <div class="card card-green">
+                    <h3>AI Accuracy</h3>
+                    <h2 id="val-conf">94.2%</h2>
+                    <small>▲ 1.5% from last month</small>
+                </div>
+            </div>
+
+            <div class="split-view">
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Demographic Trend Analysis</h3>
+                    </div>
+                    <div style="height: 350px;">
+                        <canvas id="demandChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-boxes"></i> AI Resource Plan</h3>
+                        <span id="plan-status" style="background:#dcfce7; color:#166534; padding:2px 8px; border-radius:10px; font-size:0.8rem; font-weight:bold;">Optimal</span>
+                    </div>
+                    <div>
+                        <p>Kits Required:</p>
+                        <h1 style="color:var(--gov-orange); font-size:3rem; margin:0;" id="val-kits">--</h1>
+                        <ul class="resource-list">
+                            <li>Deploy by <strong id="txt-peak-date">--</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-analytics" style="display: none;">
+            <div class="chart-box" style="margin-bottom: 20px;">
+                <div class="controls" style="justify-content: flex-start; margin:0; gap: 15px;">
+                    <select id="ana-state" class="gov-dropdown">
+                        <option value="">Loading States...</option>
+                    </select>
+                    <select id="ana-district" class="gov-dropdown" disabled>
+                        <option value="">Select District</option>
+                    </select>
+                    <button id="ana-analyze" class="gov-btn">
+                        <i class="fas fa-search"></i> Analyze
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chart-box">
+                <div class="chart-header">
+                    <h3><i class="fas fa-chart-bar"></i> District Level Analysis</h3>
+                </div>
+                <div style="height: 400px;">
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-anomaly" style="display: none;">
+            
+            <div class="controls">
+    <div class="controls-left">
+        <h2 class="platform-title">Anomaly Detection</h2>
+    </div>
+
+    <div class="controls-right">
+        <select id="anom-stateSelect" class="gov-dropdown">
+            <option>Loading States...</option>
+        </select>
+    </div>
+</div>
+
+
+            <div class="chart-box" style="width: 100%;">
+                <div class="chart-header">
+                    <h3><i class="fas fa-chart-line"></i> Anomaly Detection</h3>
+                </div>
+                <div style="height: 500px;"> <canvas id="anomDemandChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
