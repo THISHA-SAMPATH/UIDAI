@@ -2,8 +2,6 @@
 
 > A full-stack data science web application built for UIDAI (Unique Identification Authority of India) to forecast district-level Aadhaar authentication demand and detect statistical anomalies across all Indian states.
 
-![Dashboard](screenshots/chart_demand_trend.png)
-
 ---
 
 ## What It Does
@@ -104,16 +102,6 @@ http://localhost:5000
 | `/api/granular/states` | GET | States for granular analytics tab |
 | `/api/granular/districts` | GET | Districts filtered by state |
 | `/api/granular/data` | GET | District-level data for charting |
-
----
-
-## Screenshots
-
-### Demand Trend Analysis
-![Demand Trend](screenshots/chart_demand_trend.png)
-
-### Resource Load by State
-![Resource Load](screenshots/chart_total_load.png)
 
 ---
 
