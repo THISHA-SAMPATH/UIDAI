@@ -126,9 +126,6 @@ http://localhost:5000
 
 ---
 
-## Built By
-
-**Thisha S** — B.Tech Computer Science Engineering, VIT Chennai
 *Built for the UIDAI Hackathon — dataset provided by UIDAI (Unique Identification Authority of India)*
 ---
 ## License
